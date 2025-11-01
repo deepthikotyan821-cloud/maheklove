@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For My Dearest Mahek ❤️</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --love-pink: #ff4d6d;
+  --soft-blush: #ffe0e6;
+  --lavender: #e0b0ff;
+  --dark-bg: #120016;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #1a0023, #0b0010);
+  background-size: 400% 400%;
+  animation: bgshift 20s ease infinite;
+  overflow: hidden;
+  color: var(--soft-blush);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@keyframes bgshift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#initial-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  transition: all 0.7s ease;
+}
+
+#initial-screen p {
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  color: var(--soft-blush);
+  text-shadow: 0 0 15px rgba(255,224,230,0.8);
+}
+
+#surprise-link {
+  margin-top: 25px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(45deg, var(--love-pink), #ff8fa3);
+  border: none;
+  border-radius: 50px;
+  padding: 18px 45px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255,77,109,0.6);
+  transition: 0.3s;
+}
+#surprise-link:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(255,77,109,0.8);
+}
+
+#final-message {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 5;
+  opacity: 0;
+}
+
+#final-message h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: 14vw;
+  margin: 0;
+  line-height: 1;
+  color: var(--love-pink);
+  text-shadow: 0 0 25px var(--love-pink), 0 0 50px var(--love-pink);
+  animation: shimmer 3s infinite alternate;
+}
+
+#final-message h2 {
+  font-family: "Great Vibes", cursive;
+  font-size: 10vw;
+  color: var(--lavender);
+  margin-top: 10px;
+  text-shadow: 0 0 25px var(--lavender), 0 0 50px var(--lavender);
+  animation: pulse 2.5s infinite alternate;
+}
+
+@keyframes shimmer {
+  0%,100% { text-shadow: 0 0 20px var(--love-pink), 0 0 40px var(--love-pink); }
+  50% { text-shadow: 0 0 40px var(--love-pink), 0 0 80px var(--love-pink); }
+}
+@keyframes pulse {
+  0%,100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.95; }
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.footer-credit {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+}
+.footer-credit a {
+  color: inherit;
+  text-decoration: none;
+}
+.footer-credit a:hover {
+  color: white;
+}
+</style>
+</head>
+
+<body>
+<canvas id="confetti-canvas"></canvas>
+
+<div id="initial-screen">
+  <p>A little surprise for you, my dearest...</p>
+  <button id="surprise-link">Click Me, Mahek ❤️</button>
+</div>
+
+<div id="final-message">
+  <h1>I Love You</h1>
+  <h2>Forever Yours 💞</h2>
+</div>
+
+<audio id="bg-music" src="https://cdn.pixabay.com/download/audio/2022/03/23/audio_419fe4e5da.mp3?filename=romantic-piano-music-112199.mp3" preload="auto"></audio>
+
+<div class="footer-credit">Designed with ❤️ by <a href="#">RAVENSIR</a></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+<script>
+const link = document.getElementById("surprise-link");
+const initialScreen = document.getElementById("initial-screen");
+const finalMessage = document.getElementById("final-message");
+const myCanvas = document.getElementById("confetti-canvas");
+const music = document.getElementById("bg-music");
+
+const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
+
+const petals = [
+  'https://i.ibb.co/L95n5yY/pink-rose-petal.png',
+  'https://i.ibb.co/HqB10sD/red-heart.png',
+  'https://i.ibb.co/k2D884W/purple-blossom.png'
+];
+
+link.addEventListener("click", (e) => {
+  e.preventDefault();
+
+  // play music
+  music.volume = 0.5;
+  music.play();
+
+  gsap.to(initialScreen, {
+    duration: 0.8,
+    opacity: 0,
+    scale: 0.7,
+    filter: "blur(10px)",
+    onComplete: () => (initialScreen.style.display = "none")
+  });
+
+  finalMessage.style.display = "flex";
+  gsap.to(finalMessage, {
+    duration: 2,
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0)",
+    ease: "elastic.out(1,0.7)",
+    delay: 0.8
+  });
+
+  const duration = 10 * 1000;
+  const end = Date.now() + duration;
+  const shapes = petals.map((src) => {
+    const img = new Image();
+    img.src = src;
+    img.crossOrigin = "anonymous";
+    return img;
+  });
+
+  const interval = setInterval(() => {
+    const timeLeft = end - Date.now();
+    if (timeLeft <= 0) return clearInterval(interval);
+
+    myConfetti({
+      particleCount: 70,
+      startVelocity: 40,
+      spread: 100,
+      origin: { x: Math.random(), y: -0.1 },
+      shapes,
+      scalar: 1.6,
+      gravity: 0.6,
+      drift: Math.random() * 0.6 - 0.3,
+      ticks: 300,
+    });
+  }, 200);
+});
+</script>
+</body>
+</html>
